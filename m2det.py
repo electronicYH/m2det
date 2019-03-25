@@ -63,11 +63,9 @@ class M2Det:
                 for i, feature in enumerate(features):
                     print(i+1, feature.shape)
                     cls = conv2d_layer(feature, self.num_priors * self.num_classes, 3, 1, use_bias=True)
-                    cls = batch_norm(cls, is_training) # activation function is identity
                     cls = flatten_layer(cls)
                     all_cls.append(cls)
                     reg = conv2d_layer(feature, self.num_priors * 4, 3, 1, use_bias=True)
-                    reg = batch_norm(reg, is_training) # activation function is identity
                     reg = flatten_layer(reg)
                     all_reg.append(reg)
                 all_cls = tf.concat(all_cls, axis=1)
